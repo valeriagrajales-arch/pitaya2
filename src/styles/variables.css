@@ -1,0 +1,39 @@
+/* Variables CSS para colores principales */
+:root {
+    /* Colores principales */
+    --primary-magenta: rgb(178, 7, 75);
+    --primary-green: rgb(79, 130, 1);
+    --primary-yellow: rgb(237, 203, 58);
+    
+    /* Colores secundarios */
+    --secondary-magenta: rgb(197, 49, 95);
+    --secondary-green: rgb(131, 154, 40);
+    --secondary-yellow-light: rgb(255, 227, 102);
+    --secondary-yellow-deep: rgb(237, 203, 58);
+    
+    /* Colores adicionales */
+    --cream: rgb(255, 250, 230);
+    --black: rgb(0, 0, 0);
+    --white: rgb(255, 255, 255);
+    --dark-gray: rgb(51, 51, 51);
+    
+    /* Tipografías */
+    --font-mundial: 'Inter', sans-serif; /* Simulando Mundial */
+    --font-galak: 'Quicksand', sans-serif; /* Simulando Galak Round */
+}
+
+/* Configuración base del body */
+body {
+    font-family: var(--font-mundial);
+    line-height: 1.6;
+    color: var(--black);
+    background-color: var(--white);
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
