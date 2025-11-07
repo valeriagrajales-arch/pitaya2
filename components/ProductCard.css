@@ -1,0 +1,107 @@
+.product-card {
+    background-color: var(--cream);
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-image-placeholder {
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Colores de fondo para cada categoría */
+.product-image-placeholder.cremosa {
+    background: linear-gradient(135deg, var(--secondary-yellow-light) 0%, var(--primary-yellow) 100%);
+}
+
+.product-image-placeholder.rellena {
+    background: linear-gradient(135deg, var(--secondary-green) 0%, var(--primary-green) 100%);
+}
+
+.product-image-placeholder.exclusiva {
+    background: linear-gradient(135deg, var(--secondary-magenta) 0%, var(--primary-magenta) 100%);
+}
+
+/* Efecto de patrón en los placeholders */
+.product-image-placeholder::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 255, 255, 0.1) 10px,
+        rgba(255, 255, 255, 0.1) 20px
+    );
+    animation: slide 20s linear infinite;
+}
+
+@keyframes slide {
+    0% {
+        transform: translateX(0) translateY(0);
+    }
+    100% {
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+
+.product-card h3 {
+    font-family: var(--font-galak);
+    font-weight: 600;
+    font-size: 24px;
+    color: var(--primary-magenta);
+    margin-bottom: 15px;
+}
+
+.product-card p {
+    color: var(--dark-gray);
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.price {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--primary-green);
+    margin-bottom: 20px;
+}
+
+.add-to-cart {
+    background-color: var(--primary-green);
+    color: var(--white);
+    padding: 12px 25px;
+    border: none;
+    border-radius: 20px;
+    font-family: var(--font-mundial);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.add-to-cart:hover {
+    background-color: var(--secondary-green);
+}
+
+@media (max-width: 480px) {
+    .product-image-placeholder {
+        height: 200px;
+    }
+}
+
