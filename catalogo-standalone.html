@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - Pitaya</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <span class="top-bar-text">pitaya</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><h1>pitaya</h1></a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list" id="navList">
+                    <li><a href="index.html#inicio">Inicio</a></li>
+                    <li><a href="index.html#sobre">Sobre PITAYA</a></li>
+                    <li><a href="catalogo-standalone.html">Productos</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
+                    <li><a href="admin-standalone.html">Admin</a></li>
+                    <li class="cart-nav-item">
+                        <button class="cart-icon" id="cartIcon" aria-label="Carrito de compras">
+                            <span class="cart-icon-symbol">🛒</span>
+                            <span class="cart-count">0</span>
+                        </button>
+                    </li>
+                </ul>
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Catalog Section -->
+    <section class="catalog-section">
+        <div class="container">
+            <h2 class="catalog-title">Nuestro Catálogo</h2>
+            <p class="catalog-subtitle">Descubre nuestras deliciosas paletas artesanales</p>
+
+            <div id="catalogContent">
+                <!-- Los productos se cargarán aquí dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Pitaya. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div id="cartOverlay" class="cart-overlay"></div>
+        <div class="cart-panel">
+            <div class="cart-header">
+                <h2>Carrito de Compras</h2>
+                <button id="cartClose" class="cart-close" aria-label="Cerrar carrito">×</button>
+            </div>
+            <div class="cart-body">
+                <div id="cartEmpty" class="cart-empty">
+                    <p>Tu carrito está vacío</p>
+                    <a href="catalogo-standalone.html" class="cta-button">Ver Productos</a>
+                </div>
+                <div id="cartContent" class="cart-items"></div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cartTotal">$0</span>
+                </div>
+                <button id="checkoutBtn" class="checkout-button">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="productManager.js"></script>
+    <script src="cart.js"></script>
+    <script src="catalog.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+

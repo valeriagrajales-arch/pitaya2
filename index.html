@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pitaya - Un viaje de sabor en cada instante</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <span class="top-bar-text">pitaya</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><h1>pitaya</h1></a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list" id="navList">
+                    <li><a href="index.html#inicio">Inicio</a></li>
+                    <li><a href="index.html#sobre">Sobre PITAYA</a></li>
+                    <li><a href="catalogo-standalone.html">Productos</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
+                    <li><a href="admin-standalone.html">Admin</a></li>
+                    <li class="cart-nav-item">
+                        <button class="cart-icon" id="cartIcon" aria-label="Carrito de compras">
+                            <span class="cart-icon-symbol">🛒</span>
+                            <span class="cart-count">0</span>
+                        </button>
+                    </li>
+                </ul>
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section id="inicio" class="hero">
+            <div class="container">
+                <img src="img/ISOLOGO BLANCO CON FONDO ROSADO - PITAYA (2).png" alt="Pitaya" class="hero-logo">
+            </div>
+        </section>
+
+        <section id="sobre" class="about">
+            <div class="container">
+                <h2>Sobre PITAYA</h2>
+                
+                <div class="about-content">
+                    <div class="about-section">
+                        <h3>¿Quiénes somos?</h3>
+                        <p>PITAYA es una marca de paletas artesanales creada con el objetivo de crear experiencias únicas a base de sabores frutales innovadores, reflejando nuestra identidad como marca y buscando una conexión profunda con nuestros clientes.</p>
+                        <p>Surgimos de la pasión por lo natural y la necesidad de ofrecer una alternativa divertida y saludable para todos aquellos que disfrutan de los pequeños antojos.</p>
+                        <p>Cada una de nuestras paletas está hecha con frutas cuidadosamente seleccionadas, sin ingredientes artificiales, combinando sabores únicos con una presentación visual llamativa.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h3>Misión</h3>
+                        <p>Nuestra misión en PITAYA es crear momentos especiales a base de paletas artesanales excepcionales, transformando los sabores en experiencias sensoriales únicas.</p>
+                        <p>Nos comprometemos con la innovación en sabor y diseño, la calidad impecable y la autenticidad, buscando siempre inspirar alegría y conectar profundamente con nuestros clientes.</p>
+                    </div>
+
+                    <div class="about-section">
+                        <h3>Visión</h3>
+                        <p>Ser la marca líder y referente en paletas artesanales, reconocida por nuestra creatividad, calidad y diseño distintivo. Queremos que PITAYA sea inspiración de cercanía a través de una experiencia completa con cada uno de nuestros clientes, expandiendo nuestra presencia para compartir momentos de felicidad y conexión en cada rincón.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="bestsellers" class="bestsellers">
+            <div class="container">
+                <h2>BEST SELLERS</h2>
+                <div class="bestsellers-grid">
+                    <div class="bestseller-item">
+                        <img src="img/paleta pye limon.png" alt="Pay de Limón">
+                        <h3>PAY DE LIMÓN</h3>
+                    </div>
+                    <div class="bestseller-item">
+                        <img src="img/paleta mmaracuya y mango (6).png" alt="Cheesecake de Frutos Rojos">
+                        <h3>FRESAS CON CREMA</h3>
+                    </div>
+                    <div class="bestseller-item">
+                        <img src="img/paleta mmaracuya y mango (5).png" alt="Fresas con Crema">
+                        <h3>MANGO BICHE</h3>
+                    </div>
+                    <div class="bestseller-item">
+                        <img src="img/paleta mmaracuya y mango (2).png" alt="Coco Arequipe">
+                        <h3>COCO AREQUIPE</h3>
+                    </div>
+                    <div class="bestseller-item">
+                        <img src="img/paleta mmaracuya y mango (1).png" alt="Mango Biche">
+                        <h3>CHEESECAKE DE FRUTOS ROJOS</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="contact">
+            <div class="container">
+                <h2>Contacto</h2>
+                <p>¿Tienes alguna pregunta o sugerencia? Contáctanos y estaremos encantados de ayudarte.</p>
+                <form id="contactForm" onsubmit="event.preventDefault(); alert('Mensaje enviado (simulado)');">
+                    <div class="form-group">
+                        <label for="name">Nombre:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje:</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">Enviar Mensaje</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Pitaya. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal">
+        <div id="cartOverlay" class="cart-overlay"></div>
+        <div class="cart-panel">
+            <div class="cart-header">
+                <h2>Carrito de Compras</h2>
+                <button id="cartClose" class="cart-close" aria-label="Cerrar carrito">×</button>
+            </div>
+            <div class="cart-body">
+                <div id="cartEmpty" class="cart-empty">
+                    <p>Tu carrito está vacío</p>
+                    <a href="catalogo-standalone.html" class="cta-button">Ver Productos</a>
+                </div>
+                <div id="cartContent" class="cart-items"></div>
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cartTotal">$0</span>
+                </div>
+                <button id="checkoutBtn" class="checkout-button">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="productManager.js"></script>
+    <script src="cart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+

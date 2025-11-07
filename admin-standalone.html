@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Pitaya</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        .admin-section {
+            background-color: var(--cream);
+            padding: 60px 0;
+            min-height: 80vh;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .admin-title {
+            font-family: var(--font-galak);
+            font-weight: 700;
+            font-size: 36px;
+            color: var(--primary-magenta);
+            text-transform: uppercase;
+        }
+
+        .btn-new-product {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-family: var(--font-mundial);
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-new-product:hover {
+            background-color: var(--secondary-green);
+            transform: translateY(-2px);
+        }
+
+        .form-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .form-overlay.active {
+            display: flex;
+        }
+
+        .form-container {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 32px;
+            color: var(--dark-gray);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-button:hover {
+            background-color: var(--cream);
+            color: var(--primary-magenta);
+        }
+
+        .products-table-container {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            margin-bottom: 40px;
+        }
+
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        .products-table thead {
+            background-color: var(--primary-magenta);
+            color: var(--white);
+        }
+
+        .products-table th {
+            padding: 15px;
+            text-align: left;
+            font-family: var(--font-galak);
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .products-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--cream);
+            color: var(--dark-gray);
+        }
+
+        .products-table tbody tr:hover {
+            background-color: var(--cream);
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: var(--primary-magenta);
+        }
+
+        .product-description {
+            max-width: 300px;
+            font-size: 14px;
+        }
+
+        .product-price {
+            font-weight: 700;
+            color: var(--primary-green);
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .category-cremosa {
+            background-color: var(--secondary-yellow-light);
+            color: var(--black);
+        }
+
+        .category-rellena {
+            background-color: var(--secondary-green);
+            color: var(--white);
+        }
+
+        .category-exclusiva {
+            background-color: var(--secondary-magenta);
+            color: var(--white);
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-edit,
+        .btn-delete {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            font-family: var(--font-mundial);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-edit {
+            background-color: var(--primary-yellow);
+            color: var(--black);
+        }
+
+        .btn-edit:hover {
+            background-color: var(--secondary-yellow-deep);
+        }
+
+        .btn-delete {
+            background-color: var(--primary-magenta);
+            color: var(--white);
+        }
+
+        .btn-delete:hover {
+            background-color: var(--secondary-magenta);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px !important;
+            color: var(--dark-gray);
+            font-style: italic;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card h3 {
+            font-family: var(--font-galak);
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--dark-gray);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .stat-number {
+            font-family: var(--font-galak);
+            font-weight: 700;
+            font-size: 36px;
+            color: var(--primary-magenta);
+        }
+
+        .product-form {
+            margin-top: 20px;
+        }
+
+        .product-form h3 {
+            font-family: var(--font-galak);
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--primary-magenta);
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid var(--cream);
+        }
+
+        .btn-cancel,
+        .btn-submit {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-family: var(--font-mundial);
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel {
+            background-color: var(--cream);
+            color: var(--dark-gray);
+            border: 2px solid var(--secondary-yellow-light);
+        }
+
+        .btn-cancel:hover {
+            background-color: var(--secondary-yellow-light);
+        }
+
+        .btn-submit {
+            background-color: var(--primary-green);
+            color: var(--white);
+        }
+
+        .btn-submit:hover {
+            background-color: var(--secondary-green);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <span class="top-bar-text">pitaya</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><h1>pitaya</h1></a>
+            </div>
+            <nav class="nav">
+                <ul class="nav-list" id="navList">
+                    <li><a href="index.html#inicio">Inicio</a></li>
+                    <li><a href="index.html#sobre">Sobre PITAYA</a></li>
+                    <li><a href="catalogo-standalone.html">Productos</a></li>
+                    <li><a href="index.html#blog">Blog</a></li>
+                    <li><a href="index.html#contacto">Contacto</a></li>
+                    <li><a href="admin-standalone.html">Admin</a></li>
+                </ul>
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Admin Section -->
+    <section class="admin-section">
+        <div class="container">
+            <div class="admin-header">
+                <h2 class="admin-title">Panel de Administración</h2>
+                <button class="btn-new-product" onclick="openProductForm()">+ Nuevo Producto</button>
+            </div>
+
+            <div class="form-overlay" id="formOverlay" onclick="closeFormOnOverlay(event)">
+                <div class="form-container" onclick="event.stopPropagation()">
+                    <button class="close-button" onclick="closeProductForm()">×</button>
+                    <div class="product-form">
+                        <h3 id="formTitle">Nuevo Producto</h3>
+                        <form id="productForm" onsubmit="handleFormSubmit(event)">
+                            <div class="form-group">
+                                <label for="productName">Nombre del Producto *</label>
+                                <input type="text" id="productName" name="name" required placeholder="Ej: Fresas con crema">
+                            </div>
+                            <div class="form-group">
+                                <label for="productCategory">Categoría *</label>
+                                <select id="productCategory" name="category" required>
+                                    <option value="cremosa">Cremosa</option>
+                                    <option value="rellena">Rellena</option>
+                                    <option value="exclusiva">Exclusiva</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="productDescription">Descripción *</label>
+                                <textarea id="productDescription" name="description" required rows="4" placeholder="Describe el producto..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="productPrice">Precio (COP) *</label>
+                                <input type="number" id="productPrice" name="price" required min="0" step="100" placeholder="12000">
+                            </div>
+                            <div class="form-group">
+                                <label>Imágenes del Producto</label>
+                                <div id="imagesContainer">
+                                    <!-- Las imágenes se agregarán aquí dinámicamente -->
+                                </div>
+                                <button type="button" class="btn-add-image" onclick="addImageInput()" style="margin-top: 10px; padding: 8px 15px; background-color: var(--primary-yellow); color: var(--black); border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                                    + Agregar Imagen (Subir archivo)
+                                </button>
+                                <button type="button" class="btn-add-image" onclick="addImageUrlInput()" style="margin-top: 10px; margin-left: 10px; padding: 8px 15px; background-color: var(--secondary-green); color: var(--white); border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                                    + Agregar URL
+                                </button>
+                                <small style="display: block; margin-top: 5px; color: var(--dark-gray);">
+                                    Puedes subir imágenes desde tu computadora o ingresar URLs. Formatos: JPG, PNG, GIF, WEBP
+                                </small>
+                            </div>
+                            <div class="form-actions">
+                                <button type="button" class="btn-cancel" onclick="closeProductForm()">Cancelar</button>
+                                <button type="submit" class="btn-submit">Crear Producto</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="products-table-container">
+                <table class="products-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTableBody">
+                        <!-- Los productos se cargarán aquí dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <h3>Total Productos</h3>
+                    <p class="stat-number" id="totalProducts">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Cremosas</h3>
+                    <p class="stat-number" id="cremosasCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Rellenas</h3>
+                    <p class="stat-number" id="rellenasCount">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Exclusivas</h3>
+                    <p class="stat-number" id="exclusivasCount">0</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Pitaya. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="productManager.js"></script>
+    <script src="admin.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
